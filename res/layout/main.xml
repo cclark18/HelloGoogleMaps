@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+<com.google.android.maps.MapView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mapview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:apiKey="0rY16IPVdYrX033VAxI2U6uo9zkOqDL0zGsV8lw"
+/>
+
+<Button
+    android:id="@+id/add_marker_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:text="@string/add_marker" />
+
+</RelativeLayout>
+
+<!-- exported api key: 0rY16IPVdYrV5FhezVNd30k4fNST_oIYpdsOxaw -->
+<!-- debug api key: 0rY16IPVdYrX033VAxI2U6uo9zkOqDL0zGsV8lw -->
