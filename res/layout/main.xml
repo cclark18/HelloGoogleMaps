@@ -10,8 +10,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:clickable="true"
-    android:apiKey="0rY16IPVdYrX033VAxI2U6uo9zkOqDL0zGsV8lw"
-/>
+    android:apiKey="0rY16IPVdYrX033VAxI2U6uo9zkOqDL0zGsV8lw"/>
 
 <Button
     android:id="@+id/add_marker_button"
@@ -24,4 +23,4 @@
 </RelativeLayout>
 
 <!-- exported api key: 0rY16IPVdYrV5FhezVNd30k4fNST_oIYpdsOxaw -->
-<!-- debug api key: 0rY16IPVdYrX033VAxI2U6uo9zkOqDL0zGsV8lw -->
+<!-- chris debug api key: 0rY16IPVdYrX033VAxI2U6uo9zkOqDL0zGsV8lw -->
