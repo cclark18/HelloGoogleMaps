@@ -16,19 +16,21 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class HelloGoogleMaps extends MapActivity implements OnClickListener {
 	
-	int markerCounter = 0; // used to keep track of marker placement
+	int markerCounter = 0; 						// used to keep track of marker placement
 	Button mAddMarker;
-	ArrayList<GeoPoint> geoPoints = new ArrayList<GeoPoint>(); // used to dynamically store geopoints
-	private static int latitude = 35281750; // lat and long variables are only generated for testing here
-	int longitude = -120658873;
-	MapView mapView;                              // declaring these variables here (but not initializing them!)
-	MyLocationOverlay myLocationOverlay;          // allows them to be referenced in multiple methods
+	MapView mapView;                            // declaring these variables here (but not initializing them!)
+	MyLocationOverlay myLocationOverlay;   		// allows them to be referenced in multiple methods
 	List<Overlay> mapOverlays;
 	HelloItemizedOverlay itemizedoverlay;
 	Drawable drawable;
+	TextView tvCurrentLocation;
+	EditText etAddGeoPoint;
+	String testString;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,10 @@ public class HelloGoogleMaps extends MapActivity implements OnClickListener {
         mAddMarker = (Button)findViewById(R.id.add_marker_button);
         mAddMarker.setOnClickListener(this);
         markerCounter = 0;
+        tvCurrentLocation = (TextView)findViewById(R.id.tvCurrentLocation);
+        tvCurrentLocation.setOnClickListener(this);
+        etAddGeoPoint = (EditText)findViewById(R.id.etAddGeoPoint);
+        testString = "35302696,-120658876";
     }
     
     @Override
@@ -75,18 +81,23 @@ public class HelloGoogleMaps extends MapActivity implements OnClickListener {
 		return false;
 	}
 	
-	public void onClick(View btnClicked) {
-		geoPoints.add(new GeoPoint(latitude, longitude));
-		
-		extractMapView();
-		
-		itemizedoverlay.addOverlay(new OverlayItem(geoPoints.get(markerCounter), "Point " + markerCounter, null));
-		mapOverlays.add(itemizedoverlay);
-        
-        //above was initially in onCreate
-		mapView.postInvalidate();
-		markerCounter++;
-		longitude += 5000;
+	public void onClick(View objClicked) {
+		if(objClicked == mAddMarker){
+			extractMapView();
+			String etString = etAddGeoPoint.getText().toString();
+			GeoPoint typedGeoPoint = stringToGeoPoint(etString);
+			itemizedoverlay.addOverlay(new OverlayItem(typedGeoPoint, "Point " + (markerCounter+1), null));
+			mapOverlays.add(itemizedoverlay);
+			mapView.postInvalidate();
+			markerCounter++;
+		} else if(objClicked == tvCurrentLocation){
+			if(myLocationOverlay.getMyLocation()!=null){
+				GeoPoint myLocationGeoPoint = myLocationOverlay.getMyLocation();
+				String myLocationString = myLocationGeoPoint.toString();
+				CharSequence myLocationCharSequence = (CharSequence)myLocationString; 	//unnecessary cast, but it works
+				tvCurrentLocation.setText(myLocationString);							//setText takes String or CharSequence
+			}
+		}
 	}
 	
 	public void extractMapView(){                           // extracts mapview from layout in order to add overlays
@@ -94,5 +105,25 @@ public class HelloGoogleMaps extends MapActivity implements OnClickListener {
 		mapView.setBuiltInZoomControls(true);               // enables zoom
 	}
 	
+	public static GeoPoint stringToGeoPoint(String geoString){
+		String testString = geoString.replace("-", "").replace(",", "");
+		int latitudeInt;
+		int longitudeInt;
+		String latitudeString;
+		String longitudeString;
+		GeoPoint geoPoint;
+		if((testString.length()==14 || testString.length()==15 || testString.length()==16 || testString.length()==17)
+		&& (true)){											//add logic to check for only number characters
+			int commaIndex = geoString.indexOf(",");
+			latitudeString = geoString.substring(0, (commaIndex));
+			longitudeString = geoString.substring((commaIndex+1));
+			latitudeInt = java.lang.Integer.parseInt(latitudeString);
+			longitudeInt = java.lang.Integer.parseInt(longitudeString);
+			geoPoint = new GeoPoint(latitudeInt, longitudeInt);
+			return geoPoint;
+		} else{
+			return null;
+		}
+	}
 }
 //test pull

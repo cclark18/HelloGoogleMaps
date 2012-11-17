@@ -12,15 +12,37 @@
     android:clickable="true"
     android:apiKey="0rY16IPVdYrX033VAxI2U6uo9zkOqDL0zGsV8lw"/>
 
+<!-- exported api key: 0rY16IPVdYrV5FhezVNd30k4fNST_oIYpdsOxaw -->
+<!-- chris debug api key: 0rY16IPVdYrX033VAxI2U6uo9zkOqDL0zGsV8lw -->
+
+<EditText
+    android:id="@+id/etAddGeoPoint"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:ems="10"
+    android:hint="@string/enter_geopoint_hint" >
+
+    <requestFocus />
+</EditText>
+
 <Button
     android:id="@+id/add_marker_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
     android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
     android:text="@string/add_marker" />
 
-</RelativeLayout>
+<TextView
+    android:id="@+id/tvCurrentLocation"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/add_marker_button"
+    android:clickable="true"
+    android:text="@string/filler_text"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-<!-- exported api key: 0rY16IPVdYrV5FhezVNd30k4fNST_oIYpdsOxaw -->
-<!-- chris debug api key: 0rY16IPVdYrX033VAxI2U6uo9zkOqDL0zGsV8lw -->
+</RelativeLayout>
