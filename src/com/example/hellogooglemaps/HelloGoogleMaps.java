@@ -11,6 +11,7 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -50,9 +51,10 @@ public class HelloGoogleMaps extends MapActivity implements OnClickListener {
         mAddMarker = (Button)findViewById(R.id.add_marker_button);
         mAddMarker.setOnClickListener(this);
         markerCounter = 0;
-        tvCurrentLocation = (TextView)findViewById(R.id.tvCurrentLocation);
+        tvCurrentLocation = (TextView)findViewById(R.id.tv_current_location);
         tvCurrentLocation.setOnClickListener(this);
-        etAddGeoPoint = (EditText)findViewById(R.id.etAddGeoPoint);
+        tvCurrentLocation.setTextColor(Color.BLACK);
+        etAddGeoPoint = (EditText)findViewById(R.id.et_add_geo_point);
         testString = "35302696,-120658876";
     }
     
@@ -86,15 +88,16 @@ public class HelloGoogleMaps extends MapActivity implements OnClickListener {
 			extractMapView();
 			String etString = etAddGeoPoint.getText().toString();
 			GeoPoint typedGeoPoint = stringToGeoPoint(etString);
-			itemizedoverlay.addOverlay(new OverlayItem(typedGeoPoint, "Point " + (markerCounter+1), null));
-			mapOverlays.add(itemizedoverlay);
-			mapView.postInvalidate();
-			markerCounter++;
+			if(typedGeoPoint != null){
+				itemizedoverlay.addOverlay(new OverlayItem(typedGeoPoint, "Point " + (markerCounter+1), null));
+				mapOverlays.add(itemizedoverlay);
+				mapView.postInvalidate();
+				markerCounter++;
+			}
 		} else if(objClicked == tvCurrentLocation){
 			if(myLocationOverlay.getMyLocation()!=null){
 				GeoPoint myLocationGeoPoint = myLocationOverlay.getMyLocation();
 				String myLocationString = myLocationGeoPoint.toString();
-				CharSequence myLocationCharSequence = (CharSequence)myLocationString; 	//unnecessary cast, but it works
 				tvCurrentLocation.setText(myLocationString);							//setText takes String or CharSequence
 			}
 		}

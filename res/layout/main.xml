@@ -16,7 +16,7 @@
 <!-- chris debug api key: 0rY16IPVdYrX033VAxI2U6uo9zkOqDL0zGsV8lw -->
 
 <EditText
-    android:id="@+id/etAddGeoPoint"
+    android:id="@+id/et_add_geo_point"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
@@ -36,7 +36,7 @@
     android:text="@string/add_marker" />
 
 <TextView
-    android:id="@+id/tvCurrentLocation"
+    android:id="@+id/tv_current_location"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
